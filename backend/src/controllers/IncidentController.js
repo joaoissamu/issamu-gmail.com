@@ -2,7 +2,7 @@ const connection = require('../database/connection');
 
 module.exports = {
     async index(request, response) {
-        const { page = 1 } = req.query;
+        const { page = 1 } = request.query;
 
         const [count] = await connection("incidents").count();
 
@@ -19,9 +19,9 @@ module.exports = {
             "ongs.uf"
         ]);
 
-        res.header("X-Total-Count", count["count(*)"]);
+        response.header("X-Total-Count", count["count(*)"]);
 
-        return res.json(incidents);
+        return response.json(incidents);
     },
 
     async create(request, response) {
